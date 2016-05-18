@@ -1,0 +1,30 @@
+# compiled source
+# ---------------
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+#
+# backup files
+# ------------
+*.bak
+*.*!
+#
+# generated files
+# ---------------
+*.pdf
+#
+# directories
+# -----------
+build/
+dist/
+docs/
+src/main/webapp/data/
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/lib
+#
+# individual files
+# ----------------
+src/main/webapp/WEB-INF/jetty-env.xml

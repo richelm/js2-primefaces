@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Layout Example</h1>
+  A Primefaces page using p:layout and p:payoutUnit components. Example taken from
+  <a href="http://www.primefaces.org/showcase/ui/panel/layout/full.xhtml">http://www.primefaces.org/showcase/ui/panel/layout/full.xhtml</a>
+
+  <p:layout fullPage="true">
+   
+      <p:layoutUnit position="north" size="100" resizable="false" closable="false" collapsible="false">
+          <h:outputText value="Page Header" />
+      </p:layoutUnit>
+
+      <p:layoutUnit position="west" size="200" resizable="false" closable="false" collapsible="false">
+          <h:outputText value="Side Menu" />
+      </p:layoutUnit>
+
+      <p:layoutUnit position="center" gutter="0">
+          //page code
+      </p:layoutUnit>
+   
+      <p:layoutUnit position="south" size="100" resizable="false" closable="false" collapsible="false">
+          <h:outputText value="Page Footer" />
+      </p:layoutUnit>
+   
+  </p:layout>
+
+  <p:link outcome="index" value="Back to Index"></p:link>
+</h:body>
+</html>
