@@ -38,6 +38,12 @@
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
     <param-value>client</param-value>
   </context-param>
+  
+  <context-param>
+      <param-name>primefaces.THEME</param-name>
+      <param-value>pepper-grinder</param-value>
+  </context-param>
+  
   <!-- If you go to http://host/project/ (with no file name), it will
        try index.jsf first, welcome.jsf next, and so forth.
    -->
