@@ -13,10 +13,16 @@
   <ui:composition template="./pageTemplate.xhtml">
     
     <ui:define name="content">
-        <h:outputText value="Home Page"></h:outputText>
+      
+      <h:form>
+        <p:growl sticky="true" severity="info,error,fatal" />
+        <p:inputText required="true" />
+        <p:inputTextarea required="true" />
+        <p:commandButton value="Save" validateClient="true" ajax="false"/>
+      </h:form>
+      
     </ui:define>
-
+ 
   </ui:composition>
 </h:body>
 </html>
-

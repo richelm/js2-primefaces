@@ -38,10 +38,18 @@
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
     <param-value>client</param-value>
   </context-param>
-  
+ 
+  <!-- Prime Faces Configuration -->
+  <!-- enable/set theme -->
   <context-param>
       <param-name>primefaces.THEME</param-name>
-      <param-value>pepper-grinder</param-value>
+      <param-value>smoothness</param-value>
+  </context-param>
+
+  <!-- enable client side validation -->
+  <context-param>
+    <param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+    <param-value>true</param-value>
   </context-param>
   
   <!-- If you go to http://host/project/ (with no file name), it will
