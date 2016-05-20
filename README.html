@@ -1,0 +1,40 @@
+<h1 id="learn-jsf-2.0">Learn JSF 2.0</h1>
+<p>This repository is a place to save my work as I learn JSF 2.0 and Prime Faces. Currently working with Morjarra-2.2.13 and PrimeFaces-5.3</p>
+<p><strong>Current Directory Structure</strong></p>
+<p>This is the current directory structure of project. It conforms to the Gradle conventions, although currently using ANT for project builds (refer to build.xml).</p>
+<pre><code>  ├── build.gradle
+  ├── build.xml
+  ├── docs
+  ├── README.md
+  └── src
+      └── main
+          ├── java
+          │   └── hit
+          │       └── test
+          │           └── EditorBean.java
+          └── webapp
+              ├── anotherPage.xhtml
+              ├── clientValidation.xhtml
+              ├── editorPage.xhtml
+              ├── gridExample.xhtml
+              ├── index.xhtml
+              ├── layoutExample.xhtml
+              ├── pageTemplate.xhtml
+              ├── resources
+              │   └── css
+              │       └── common.css
+              ├── searchPage.xhtml
+              └── WEB-INF
+                  ├── lib
+                  │   ├── javax.faces-2.2.13.jar
+                  │   ├── pepper-grinder-1.0.10.jar
+                  │   ├── primefaces-5.3.jar
+                  │   └── smoothness-1.0.10.jar
+                  └── web.xml</code></pre>
+<h2 id="issues">Issues</h2>
+<h3 id="error-importing-javax.validation.constraints">Error importing javax.validation.constraints</h3>
+<p>You need the validation-api-1.1.0.Final.jar, which can be downloaded from here:</p>
+<p><a href="http://mvnrepository.com/artifact/javax.validation/validation-api/1.1.0.Final">http://mvnrepository.com/artifact/javax.validation/validation-api/1.1.0.Final</a></p>
+<p>Gradle setup:</p>
+<pre><code>  // http://mvnrepository.com/artifact/javax.validation/validation-api
+  compile group: &#39;javax.validation&#39;, name: &#39;validation-api&#39;, version: &#39;1.1.0.Final&#39;</code></pre>

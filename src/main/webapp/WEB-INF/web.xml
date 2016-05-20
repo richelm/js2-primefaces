@@ -38,7 +38,15 @@
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
     <param-value>client</param-value>
   </context-param>
- 
+
+  <!-- bean validation -->
+  <context-param>
+      <param-name>
+          javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
+      </param-name>
+      <param-value>true</param-value>
+  </context-param> 
+  
   <!-- Prime Faces Configuration -->
   <!-- enable/set theme -->
   <context-param>

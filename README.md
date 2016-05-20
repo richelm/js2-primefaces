@@ -39,3 +39,15 @@ This is the current directory structure of project. It conforms to the Gradle co
                       └── web.xml
 
 
+## Issues
+
+### Error importing javax.validation.constraints 
+
+You need the validation-api-1.1.0.Final.jar, which can be downloaded from here:
+
+[http://mvnrepository.com/artifact/javax.validation/validation-api/1.1.0.Final](http://mvnrepository.com/artifact/javax.validation/validation-api/1.1.0.Final)
+
+Gradle setup:
+
+      // http://mvnrepository.com/artifact/javax.validation/validation-api
+      compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
