@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -8,15 +8,15 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-  
+
 </h:head>
 
 <h:body>
   <!-- referenced custom CSS here so that it is last loaded. -->
   <h:outputStylesheet library="css" name="common.css"/>
-  
+
   <p:layout fullPage="true">
-    
+
     <p:layoutUnit position="north" size="70" resizable="false" closable="false" collapsible="false">
       <ui:insert name="header">
         <div class="hit-header">
@@ -24,21 +24,23 @@
         </div>
       </ui:insert>
     </p:layoutUnit>
-    
+
     <p:layoutUnit position="west" size="250" resizable="false" closable="false" collapsible="false" gutter="1">
       <ui:insert name="menu">
         <p:menu>
           <p:menuitem value="Home" url="index.jsf"></p:menuitem>
           <p:menuitem value="Search" url="searchPage.jsf"></p:menuitem>
           <p:menuitem value="Client Validation" url="clientValidation.jsf"></p:menuitem>
+          <p:menuitem value="Bean Validation" url="bean.jsf"></p:menuitem>
+          <p:menuitem value="Simple Bean Validation" url="simpleBV.jsf"></p:menuitem>
           <p:menuitem value="Another Page" url="anotherPage.jsf"></p:menuitem>
-        </p:menu>        
+        </p:menu>
       </ui:insert>
     </p:layoutUnit>
 
     <p:layoutUnit position="center" gutter="1">
     <ui:insert name="content">Main Page Content</ui:insert>
-    </p:layoutUnit>      
+    </p:layoutUnit>
 
     <p:layoutUnit position="south" size="50" resizable="false" closable="false" collapsible="false" gutter="1">
     <ui:insert name="footer">
@@ -47,9 +49,9 @@
       </div>
     </ui:insert>
     </p:layoutUnit>
-    
+
   </p:layout>
 
-  
+
   </h:body>
 </html>
