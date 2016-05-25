@@ -16,4 +16,5 @@ public class Person {
 	public void setSex(boolean sex) {
 		this.sex = sex;
 	}
+
 }

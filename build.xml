@@ -1,8 +1,8 @@
 <!--
   MICHIGAN STATE UNIVERSITY HEALTH INFORMATION TECHNOLOGY
-  
+
   FILE: build.xml
-  
+
   Sample ANT build.xml file for a simple web application.
 -->
 <project name="Simple Web Application" default="help" basedir=".">
@@ -17,7 +17,7 @@
   <property name="docs.home"     value="${basedir}/docs"/>
   <property name="src.home"      value="${basedir}/src/main/java"/>
   <property name="web.home"      value="${basedir}/src/main/webapp"/>
-  <property name="server.home"   value="/home/richs/bin/tomcat" />
+  <property name="server.home"   value="/home/richs/bin/tomcat7" />
 
 <!-- ==================== External Dependencies =========================== -->
 
@@ -76,8 +76,10 @@
     <fileset dir="${server.home}/lib">
       <include name="*.jar"/>
     </fileset>
-
-  </path>    
+    <fileset dir="${web.home}/WEB-INF/lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
 
 
 <!--  ======= Compilation Control Options ======= -->
@@ -96,12 +98,12 @@
   <property name="compile.debug"       value="true"/>
   <property name="compile.deprecation" value="false"/>
 
-<!-- 
+<!--
   The folowing was added after getting this warning message:
-  
-    warning: 'includeantruntime' was not set, defaulting to 
+
+    warning: 'includeantruntime' was not set, defaulting to
     build.sysclasspath=last; set to false for repeatable builds
--->  
+-->
   <presetdef name="hit.javac">
     <javac includeantruntime="false" />
   </presetdef>
@@ -124,8 +126,8 @@
     compile control options:
     compile.debug: ${compile.debug}
     compile.deprecation: ${compile.deprecation}
-  </echo>  
-    
+  </echo>
+
   </target>
 
 
@@ -143,18 +145,18 @@
     <delete dir="${build.home}"/>
     <delete dir="${dist.home}"/>
   </target>
-  
-  
+
+
 <!-- ======= create target ======= -->
 
 <!--
 
   The "create" target is used to create the project source directories
   and copy any standard static files from external sources.
-  
-  This is the first target to be executed when starting an new 
+
+  This is the first target to be executed when starting an new
   application. It should only be executed once.
-  
+
 -->
 
   <target name="create"
@@ -164,7 +166,7 @@
     <mkdir dir="${web.home}"/>
     <mkdir dir="${web.home}/WEB-INF"/>
     <mkdir dir="${web.home}/WEB-INF/classes"/>
-    
+
     <!-- directories for Angular application -->
     <mkdir dir="${web.home}/css" />
     <mkdir dir="${web.home}/js" />
@@ -174,7 +176,7 @@
     <mkdir dir="${web.home}/js/resources" />
     <mkdir dir="${web.home}/js/services" />
     <mkdir dir="${web.home}/js/vendor"/>
-    
+
     <!-- Java source and documentation directories -->
     <mkdir dir="${src.home}" />
     <mkdir dir="${docs.home}" />
@@ -191,8 +193,8 @@
 
   The "prepare" target is used to create the "build" destination directory,
   and copy the static contents of your web application to it.
-  
--->  
+
+-->
 
   <target name="prepare"
     description="Create build destication directory.">
@@ -210,7 +212,7 @@
     <!-- Copy static files from external dependencies as needed -->
     <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
   </target>
-  
+
 
 <!-- ======= Compile Target ======= -->
 
@@ -274,44 +276,44 @@
     <!-- Copy additional files to ${dist.home} as necessary -->
 
   </target>
-    
+
 
 <!-- ======= Run Target ======= -->
 
-<!-- 
+<!--
 
     The "run" target runs the war application under jetty-runner
-    
+
 -->
 <!--
     <target name = "run" depends="dist"
      description="Run the war application with jetty-runner">
-     
+
         <java
             dir="${jetty.home}"
             jar="${jetty.home}/bin/jetty-runner.jar"
             fork="true">
             <arg value="${dist.home}/${app.name}-${app.version}.war" />
         </java>
-        
+
      </target>
 -->
 
 <!-- ======= deploy Target ======= -->
 
-<!-- 
+<!--
 
     The "deploy" target copys the war application to webapps directory
-    
+
 -->
 
     <target name = "deploy" depends="dist"
      description="Deploy the war application to webapps directory">
-     
-        <copy 
+
+        <copy
             file="${dist.home}/${app.name}-${app.version}.war"
             tofile="${server.home}/webapps/${app.name}-${app.version}.war">
         </copy>
-        
+
      </target>
 </project>
