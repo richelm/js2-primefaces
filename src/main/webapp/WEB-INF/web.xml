@@ -28,9 +28,10 @@
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
 
+  <!-- set to production to avoid the warning messages (bug in JSF) -->
   <context-param>
     <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
+    <param-value>Production</param-value>
   </context-param>
 
   <context-param>

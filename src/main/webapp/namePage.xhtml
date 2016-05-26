@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/pageTemplate.xhtml">
+
+  <ui:define name="content">
+
+    <h:form>
+    <p:panel header="Name Entry">
+      <p:messages closable="true" />
+
+      <p:panelGrid columns="2">
+        <p:outputLabel for="firstName" value="First Name:" />
+        <p:inputText id="firstName" value="#{nameBean.firstName}" label="FirstName"/>
+
+        <p:outputLabel for="lastName" value="Last Name:" />
+        <p:inputText id="lastName" value="#{nameBean.lastName}" label="LastName"/>
+      </p:panelGrid>
+      <p:commandButton value="Save" validateClient="true" ajax="false"
+          action="#{nameBean.update()}"  />
+
+    </p:panel>
+    </h:form>
+
+  </ui:define>
+
+</ui:composition>
