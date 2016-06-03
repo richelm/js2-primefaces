@@ -17,9 +17,12 @@
 
         <p:outputLabel for="lastName" value="Last Name:" />
         <p:inputText id="lastName" value="#{nameBean.lastName}" label="LastName"/>
+
+        <p:outputLabel for="myNum" value="Number:" />
+        <p:inputText id="myNum" value="#{nameBean.myNum}" label="Number"/>
       </p:panelGrid>
       <p:commandButton value="Save" validateClient="true" ajax="false"
-          action="#{nameBean.update()}"  />
+          action="#{nameBean.save()}"  />
 
     </p:panel>
     </h:form>

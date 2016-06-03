@@ -17,7 +17,7 @@
   <property name="docs.home"     value="${basedir}/docs"/>
   <property name="src.home"      value="${basedir}/src/main/java"/>
   <property name="web.home"      value="${basedir}/src/main/webapp"/>
-  <property name="server.home"   value="/home/richs/bin/tomcat7" />
+  <property name="server.home"   value="/home/richs/bin/jetty" />
   <property name="groovy.src"    value="${basedir}/src/main/groovy" />
 
 <!-- ==================== External Dependencies =========================== -->

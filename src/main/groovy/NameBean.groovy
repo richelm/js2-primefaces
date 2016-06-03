@@ -1,11 +1,15 @@
 package hit.test;
 
+import groovy.sql.Sql
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedBean;
 import groovy.transform.Canonical;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 @Canonical
 @ManagedBean
@@ -18,6 +22,25 @@ public class NameBean {
     @Size(max=10,message="Last name cannot exceed 10 characters.")
     String lastName
 
+    @Max(10)
+    java.lang.Long myNum
+
+    @Resource(name="jdbc/DSTest") private DataSource dataSource;
+    String storedProcedureCall = "{? = call up_raise_error(?)}"
+    def params = [Sql.INTEGER,myNum]
+
+    public void save() {
+      try {
+        def sql = new Sql(dataSource)
+        sql.call(storedProcedureCall, params) {rv ->
+          returnValue = rv
+        }
+        sql.close()
+      } catch(Exception e) {
+        addMessage(e.getMessage())
+      }
+    }
+
     public void update() {
       if (firstName == "XXX") {
         addMessage("Something went horribly wrong!");
@@ -25,8 +48,8 @@ public class NameBean {
     }
 
     public void addMessage(String summary) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary,  null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, errorMessage);
     }
 
 }
