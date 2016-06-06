@@ -165,7 +165,7 @@
   This example assumes that you will be including your classes in an
   unpacked directory hierarchy under "/WEB-INF/classes".
 -->
-  <target name="compile" depends="prepare"
+  <target name="compile" depends="prepare,groovyCompile"
    description="Compile Java sources">
 
     <!-- Compile Java classes as necessary -->

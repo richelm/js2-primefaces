@@ -8,30 +8,37 @@ import groovy.transform.Canonical;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.annotation.Resource;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import java.sql.Connection;
 
-@Canonical
+
 @ManagedBean
-public class NameBean {
+public class EmployeeBean {
+
     @NotNull(message="You must enter a first name.")
-    @Size(max=5,message="First name cannot exceed 5 characters.")
+    @Size(max=40,message="First name cannot exceed 40 characters.")
     String firstName
 
     @NotNull(message="You must enter a last name.")
-    @Size(max=10,message="Last name cannot exceed 10 characters.")
+    @Size(max=40,message="Last name cannot exceed 40 characters.")
     String lastName
 
-    @Max(10)
-    java.lang.Long myNum
+    int sickDays
 
-    @Resource(name="jdbc/DSTest") private DataSource dataSource;
-    String storedProcedureCall = "{? = call up_raise_error(?)}"
-    def params = [Sql.INTEGER,myNum]
+    int returnValue
 
     public void save() {
+      Connection connection = null;
+      String storedProcedureCall = "{? = call up_raise_error(?)}"
+      def params = [Sql.INTEGER,sickDays]
       try {
-        def sql = new Sql(dataSource)
+        InitialContext ctx = new InitialContext();
+        DataSource dataSource = ctx.lookup("jdbc/DSTest")
+        Connection conn = dataSource.getConnection()
+        connection = dataSource.getConnection();
+
+        def sql = new Sql(connection)
         sql.call(storedProcedureCall, params) {rv ->
           returnValue = rv
         }
@@ -40,6 +47,7 @@ public class NameBean {
         addMessage(e.getMessage())
       }
     }
+
 
     public void update() {
       if (firstName == "XXX") {
