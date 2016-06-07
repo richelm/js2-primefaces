@@ -60,6 +60,12 @@
     <param-value>true</param-value>
   </context-param>
 
+  <!-- enable bean validation transformation -->
+  <context-param>;
+  <param-name>primefaces.TRANSFORM_METADATA</param-name>
+  <param-value>true</param-value>
+  </context-param>
+  
   <!-- If you go to http://host/project/ (with no file name), it will
        try index.jsf first, welcome.jsf next, and so forth.
    -->

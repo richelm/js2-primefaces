@@ -6,7 +6,7 @@
     border: 0;
 }
 
-.hit-header {
+.headerDiv {
     color: #ffffff;
     background-color: #18453B;
     padding: 5px 5px 5px 5px;
@@ -14,10 +14,11 @@
     margin: 0px 0px 0px 0px;
 }
 
-.hit-footer {
+.footerDiv {
     color: #ffffff;
     background-color: #18453B;
     padding: 10px 10px 10px 10px;
     text-align: center;
     font-size: 0.75em;
+    margin: 0px 0px 0px 0px;
 }

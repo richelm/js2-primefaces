@@ -8,26 +8,28 @@
   <ui:define name="content">
 
     <h:form>
-    <p:panel header="Employee">
-      <p:messages closable="true" />
 
-      <p:panelGrid columns="2">
+        <p:panel header="Employee">
+          <p:messages closable="true" />
 
-        <p:outputLabel for="firstName" value="First Name:" />
-        <p:inputText id="firstName" value="#{employee.firstName}" label="FirstName"/>
+          <h:panelGrid columns="2">
 
-        <p:outputLabel for="lastName" value="Last Name:" />
-        <p:inputText id="lastName" value="#{employee.lastName}" label="LastName"/>
+          <p:outputLabel for="firstName" value="First Name:" />
+          <p:inputText id="firstName" value="#{employee.firstName}" label="FirstName"/>
 
-        <p:outputLabel for="sickdays" value="Sick Days:" />
-        <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employee.sickDays}"  />
+          <p:outputLabel for="lastName" value="Last Name:" />
+          <p:inputText id="lastName" value="#{employee.lastName}" label="LastName"/>
 
-      </p:panelGrid>
-      <p:commandButton value="Update" validateClient="true" ajax="false"
+          <p:outputLabel for="sickdays" value="Sick Days:" />
+          <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employee.sickDays}"  />
+
+        </h:panelGrid>
+          <p:commandButton value="Update" validateClient="true" ajax="false"
           action="#{employee.update()}"  />
-      <p:commandButton value="Save" validateClient="true" ajax="false"
+          <p:commandButton value="Save" validateClient="true" ajax="false"
           action="#{employee.save()}"  />
-    </p:panel>
+        </p:panel>
+
     </h:form>
 
   </ui:define>

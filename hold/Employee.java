@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class Employee extends HitManagedBean {
+public class Employee extends BaseBean {
 
   @NotNull(message="You must enter a last name.")
   private String lastName;
@@ -22,7 +22,9 @@ public class Employee extends HitManagedBean {
 
 
   public void update() {
-    updateRecord(sickDays);
+    storedProcedureCall = "{? = call up_raise_error(?)}";
+    params = [Sql.INTEGER,sickDays];
+    updateRecord();
   }
 
   public String getFirstName() {
