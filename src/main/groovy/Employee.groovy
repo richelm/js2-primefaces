@@ -2,6 +2,7 @@ package hit.test;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Min;
@@ -35,10 +36,14 @@ public class Employee extends BaseBean {
 
   @DecimalMin("1.0")
   @DecimalMax("2.75")
-  double fringe_ratio
+  double fringeRatio
+
+  @PostConstruct
+  public void init() {
+    dataSourceName = "jdbc/DSTest"
+  }
 
   public void update() {
-    dataSourceName = "jdbc/DSTest"
     storedProcedureCall = "{? = call up_raise_error(?)}"
     params = [Sql.INTEGER,sickDays]
     updateRecord()
@@ -46,7 +51,7 @@ public class Employee extends BaseBean {
 
   public void create() {
     storedProcedureCall = "{? = call up_create_employee(?,?,?,?,?,?)}"
-    params = [Sql.INTEGER,lastName, firstName, email, startDate, sickDays, fringe_ratio]
+    params = [Sql.INTEGER,lastName, firstName, email, startDate, sickDays, fringeRatio]
     createRecord()
   }
 }

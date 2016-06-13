@@ -29,6 +29,32 @@ public class BaseBean {
     }
   }
 
+  public void createRecord() {
+    try {
+      Connection conn = getConnection()
+      def sql = Sql.newInstance(conn)
+      sql.call(storedProcedureCall, params) {rv ->
+        returnValue = rv
+      }
+      conn.close()
+    } catch(Exception e) {
+      addMessage(e.getMessage())
+    }
+  }
+
+  public void deleteRecord() {
+    try {
+      Connection conn = getConnection()
+      def sql = Sql.newInstance(conn)
+      sql.call(storedProcedureCall, params) {rv ->
+        returnValue = rv
+      }
+      conn.close()
+    } catch(Exception e) {
+      addMessage(e.getMessage())
+    }
+  }
+
   private Connection getConnection() {
     InitialContext ctx = new InitialContext();
     DataSource dataSource = ctx.lookup(dataSourceName)

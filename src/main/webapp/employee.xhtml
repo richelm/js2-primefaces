@@ -15,19 +15,17 @@
           <h:panelGrid columns="2">
 
           <p:outputLabel for="firstName" value="First Name:" />
-          <p:inputText id="firstName" value="#{employee.firstName}" label="FirstName"/>
+          <p:inputText id="firstName" value="#{employeeBean.firstName}" label="FirstName"/>
 
           <p:outputLabel for="lastName" value="Last Name:" />
-          <p:inputText id="lastName" value="#{employee.lastName}" label="LastName"/>
+          <p:inputText id="lastName" value="#{employeeBean.lastName}" label="LastName"/>
 
           <p:outputLabel for="sickdays" value="Sick Days:" />
-          <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employee.sickDays}"  />
+          <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employeeBean.sickDays}"  />
 
         </h:panelGrid>
-          <p:commandButton value="Update" validateClient="true" ajax="false"
-          action="#{employee.update()}"  />
           <p:commandButton value="Save" validateClient="true" ajax="false"
-          action="#{employee.save()}"  />
+          action="#{employeeBean.save()}"  />
         </p:panel>
 
     </h:form>

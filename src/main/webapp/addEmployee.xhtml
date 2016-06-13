@@ -8,25 +8,34 @@
   <ui:define name="content">
 
     <h:form>
-    <p:panel header="Employee">
-      <p:messages closable="true" />
+    <p:panel header="Add Employee">
+      <p:messages closable="true" severity="WARN,ERROR,FATAL"/>
+      <p:growl life="5000" severity="INFO" />
 
       <p:panelGrid columns="2">
 
         <p:outputLabel for="firstName" value="First Name:" />
-        <p:inputText id="firstName" value="#{employee.firstName}" label="FirstName"/>
+        <p:inputText id="firstName" value="#{employeeBean.firstName}" label="FirstName"/>
 
         <p:outputLabel for="lastName" value="Last Name:" />
-        <p:inputText id="lastName" value="#{employee.lastName}" label="LastName"/>
+        <p:inputText id="lastName" value="#{employeeBean.lastName}" label="LastName"/>
 
+        <p:outputLabel for="email" value="EMail:" />
+        <p:inputText id="email" value="#{employeeBean.email}" label="EMail"/>
+<!--
+        <p:outputLabel for="startdate" value="Start Date:" />
+        <p:calendar id="startdate" value="#{EmployeeBean.startDate}" />
+-->
         <p:outputLabel for="sickdays" value="Sick Days:" />
-        <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employee.sickDays}"  />
-
+        <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{employeeBean.sickDays}"  />
+<!--
+        <p:outputLabel for="fringeratio" value="Fringe Ratio:" />
+        <p:inputMask id="fringeratio" maxLength="3" mask="9.99" value="#{EmployeeBean.fringeRatio}"  />
+-->
       </p:panelGrid>
-      <p:commandButton value="Update" validateClient="true" ajax="false"
-          action="#{employee.update()}"  />
+
       <p:commandButton value="Save" validateClient="true" ajax="false"
-          action="#{employee.save()}"  />
+          action="#{employeeBean.create()}"  />
     </p:panel>
     </h:form>
 
