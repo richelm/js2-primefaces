@@ -14,13 +14,12 @@ import javax.validation.constraints.DecimalMax;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import javax.naming.InitialContext;
-import java.lang.Integer;
 import java.sql.*;
-import java.util.*;
+
 
 @ManagedBean
 @RequestScoped
-public class EmployeeBean {
+public class EmployeeBean extends BaseBean {
 
   @Size(max=40)
   @NotNull(message="You must enter a last name.")
@@ -33,15 +32,20 @@ public class EmployeeBean {
   @Size(max=60)
   String email;
 
-  //java.lang.Date startDate;
+  java.util.Date startDate;
 
   @Min(1L)
   @Max(24L)
   int sickDays;
 
-  //@DecimalMin("1.0")
-  //@DecimalMax("2.75")
-  //Double fringeRatio;
+  @DecimalMin("1.0")
+  @DecimalMax("2.75")
+  double fringeRatio;
+
+  @PostConstruct
+  public void init() {
+    dataSourceName = "jdbc/DSTest";
+  }
 
   // setters
   public void setFirstName(String s) {
@@ -53,15 +57,15 @@ public class EmployeeBean {
   public void setEmail(String s) {
      this.email = s;
   }
-  // public void setStartData(Date d) {
-  //   this.startDate = d;
-  // }
+  public void setStartDate(java.util.Date d) {
+    this.startDate = d;
+  }
   public void setSickDays(int i) {
     this.sickDays = i;
   }
-  // public void set(doulbe d) {
-  //   this.fringeRatio = d;
-  // }
+  public void setFringeRatio(double d) {
+    this.fringeRatio = d;
+  }
 
   // getters
   public String getFirstName() {
@@ -73,37 +77,30 @@ public class EmployeeBean {
   public String getEmail() {
    return this.email;
   }
-  // public Date getDate() {
-  //   return this.startDate;
-  // }
+  public java.util.Date getStartDate() {
+    return this.startDate;
+  }
   public int getSickDays() {
     return this.sickDays;
   }
-  // public double getFringeRatio() {
-  //   return this.fringeRatio;
-  // }
+  public double getFringeRatio() {
+    return this.fringeRatio;
+  }
 
-  // save record
+  // create record
   public void create() {
-    boolean result;
-    int returnValue;
-    if (sickDays == 7) {
-      addErrorMessage("You must never enter seven for sickDays. Shame on you!");
-    }
     String upstmt = "{? = call testdb.dbo.up_create_employee(?,?,?,?,?,?)}";
     try {
-      String dataSourceName = "jdbc/DSTest";
-      InitialContext ctx = new InitialContext();
-      DataSource ds = (DataSource)ctx.lookup(dataSourceName);
-      Connection conn = ds.getConnection();
+      Connection conn = getDSConnection();
       CallableStatement cstmt =  conn.prepareCall(upstmt);
+      java.sql.Date sqlDate = new java.sql.Date(startDate.getTime());
   		cstmt.registerOutParameter(1,Types.INTEGER);
       cstmt.setString(2,firstName);
       cstmt.setString(3,lastName);
       cstmt.setString(4,email);
-      cstmt.setString(5,"6/1/2016");
+      cstmt.setDate(5,sqlDate);
       cstmt.setInt(6, sickDays);
-      cstmt.setDouble(7,1.2);
+      cstmt.setDouble(7,fringeRatio);
 
       result = cstmt.execute();
   		returnValue = cstmt.getInt(1);
@@ -113,18 +110,8 @@ public class EmployeeBean {
       }
       conn.close();
     } catch(Exception e) {
-      addErrorMessage(e.getMessage());
+      addFatalMessage(e.getMessage());
     }
-  }
-
-  private void addErrorMessage(String summary) {
-      FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary,  null);
-      FacesContext.getCurrentInstance().addMessage(null, errorMessage);
-  }
-
-  private void addInfoMessage(String summary) {
-      FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
-      FacesContext.getCurrentInstance().addMessage(null, errorMessage);
   }
 
 }
