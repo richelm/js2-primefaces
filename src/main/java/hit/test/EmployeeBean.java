@@ -2,8 +2,6 @@ package hit.test;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,8 +9,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.DecimalMax;
-import javax.sql.DataSource;
-import java.sql.Connection;
 import javax.naming.InitialContext;
 import java.sql.*;
 
@@ -42,6 +38,8 @@ public class EmployeeBean extends BaseBean {
   @DecimalMax("2.75")
   double fringeRatio;
 
+  double departmentID;
+
   @PostConstruct
   public void init() {
     dataSourceName = "jdbc/DSTest";
@@ -67,6 +65,10 @@ public class EmployeeBean extends BaseBean {
     this.fringeRatio = d;
   }
 
+  public void setDepartmentID(double d) {
+    this.departmentID = d;
+  }
+
   // getters
   public String getFirstName() {
     return this.firstName;
@@ -86,10 +88,13 @@ public class EmployeeBean extends BaseBean {
   public double getFringeRatio() {
     return this.fringeRatio;
   }
+  public double getDepartmentID() {
+    return this.departmentID;
+  }
 
   // create record
   public void create() {
-    String upstmt = "{? = call testdb.dbo.up_create_employee(?,?,?,?,?,?)}";
+    String upstmt = "{? = call testdb.dbo.up_create_employee(?,?,?,?,?,?,?)}";
     try {
       Connection conn = getDSConnection();
       CallableStatement cstmt =  conn.prepareCall(upstmt);
@@ -101,12 +106,15 @@ public class EmployeeBean extends BaseBean {
       cstmt.setDate(5,sqlDate);
       cstmt.setInt(6, sickDays);
       cstmt.setDouble(7,fringeRatio);
+      cstmt.setDouble(8,departmentID);
 
       result = cstmt.execute();
   		returnValue = cstmt.getInt(1);
 
       if (returnValue == 0) {
         addInfoMessage("Record created successfully");
+      } else {
+        addFatalMessage("Create record failed with non-zero return value.");
       }
       conn.close();
     } catch(Exception e) {

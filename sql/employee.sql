@@ -17,16 +17,19 @@ create table employee (
   email           varchar(60),
   start_date      date,
   sick_days       int,
-  fringe_ratio    numeric(5,2)
+  fringe_ratio    numeric(5,2),
+  department_id   numeric(7,0),
+  foreign key (department_id)
+     references department(department_id)
 )
 go
 
 -- load with inital values for testing
-insert into employee values("Buggs","Bunny","bbunny@nowhere","7/19/1995",27,1.75)
-insert into employee values("Daffy","Duck","duck@nowhere","12/15/2001",35,1.75)
-insert into employee values("Elmer","Fudd","fudd@nowhere","8/28/1988",50,2.35)
-insert into employee values("Yosemite","Sam","samy@nowhere","3/15/2003",11,1.25)
-insert into employee values("Foghorn","Leghorn","rooster@nowhere","3/15/2003",23,1.75)
+insert into employee values("Buggs","Bunny","bbunny@nowhere","7/19/1995",27,1.75,1)
+insert into employee values("Daffy","Duck","duck@nowhere","12/15/2001",35,1.75,1)
+insert into employee values("Elmer","Fudd","fudd@nowhere","8/28/1988",50,2.35,1)
+insert into employee values("Yosemite","Sam","samy@nowhere","3/15/2003",11,1.25,1)
+insert into employee values("Foghorn","Leghorn","rooster@nowhere","3/15/2003",23,1.75,1)
 go
 
 -- display success/fail message
