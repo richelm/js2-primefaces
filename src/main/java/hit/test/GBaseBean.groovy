@@ -10,7 +10,7 @@ import groovy.sql.Sql
 import groovy.transform.Canonical;
 
 @Canonical
-public class BaseBean {
+public class GBaseBean {
   String dataSourceName
   String storedProcedureCall
   def params = []
@@ -25,7 +25,10 @@ public class BaseBean {
       }
       conn.close()
     } catch(Exception e) {
-      addMessage(e.getMessage())
+      if (returnValue == 0) {
+        returnValue = -100
+      }
+      addFatalMessage(e.getMessage())
     }
   }
 
@@ -38,7 +41,10 @@ public class BaseBean {
       }
       conn.close()
     } catch(Exception e) {
-      addMessage(e.getMessage())
+      if (returnValue == 0) {
+        returnValue = -100
+      }
+      addFatalMessage(e.getMessage())
     }
   }
 
@@ -51,7 +57,10 @@ public class BaseBean {
       }
       conn.close()
     } catch(Exception e) {
-      addMessage(e.getMessage())
+      if (returnValue == 0) {
+        returnValue = -100
+      }
+      addFatalMessage(e.getMessage())
     }
   }
 
@@ -61,8 +70,23 @@ public class BaseBean {
     return dataSource.getConnection()
   }
 
-  private void addMessage(String summary) {
+  public void addFatalMessage(String summary) {
+      FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  null);
+      FacesContext.getCurrentInstance().addMessage(null, errorMessage);
+  }
+
+  public void addErrorMessage(String summary) {
       FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary,  null);
+      FacesContext.getCurrentInstance().addMessage(null, errorMessage);
+  }
+
+  public void addWarnMessage(String summary) {
+      FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_WARN, summary,  null);
+      FacesContext.getCurrentInstance().addMessage(null, errorMessage);
+  }
+
+  public void addInfoMessage(String summary) {
+      FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
       FacesContext.getCurrentInstance().addMessage(null, errorMessage);
   }
 

@@ -14,7 +14,8 @@ create procedure up_create_employee
     @email           varchar(60),
     @start_date      date,
     @sick_days       int,
-    @fringe_ratio    numeric(5,2)
+    @fringe_ratio    numeric(5,2),
+    @department_id   numeric(7,0)
 
 as
   declare
@@ -29,8 +30,21 @@ select
 begin transaction
 
 insert into dbo.employee
-  (first_name, last_name, email, start_date, sick_days, fringe_ratio)
-  values(@first_name, @last_name, @email, @start_date, @sick_days, @fringe_ratio)
+  (first_name, 
+   last_name,
+   email,
+   start_date,
+   sick_days,
+   fringe_ratio,
+   department_id
+ )
+  values(@first_name,
+         @last_name,
+         @email,
+         @start_date,
+         @sick_days,
+         @fringe_ratio,
+         @department_id)
 
 select
   @error = @@error,

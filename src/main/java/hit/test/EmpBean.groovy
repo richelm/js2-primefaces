@@ -15,7 +15,7 @@ import groovy.transform.Canonical;
 @Canonical
 @ManagedBean
 @RequestScoped
-public class Employee extends BaseBean {
+public class EmpBean extends GBaseBean {
 
   @Size(max=40)
   @NotNull(message="You must enter a last name.")
@@ -28,15 +28,18 @@ public class Employee extends BaseBean {
   @Size(max=60)
   String email
 
-  Date startDate
+  // Date startDate
 
   @Min(1L)
   @Max(24L)
   int sickDays
 
-  @DecimalMin("1.0")
-  @DecimalMax("2.75")
-  double fringeRatio
+  double departmentID
+
+  // @DecimalMin("1.0")
+  // @DecimalMax("2.75")
+  // double fringeRatio
+
 
   @PostConstruct
   public void init() {
@@ -50,8 +53,14 @@ public class Employee extends BaseBean {
   }
 
   public void create() {
-    storedProcedureCall = "{? = call up_create_employee(?,?,?,?,?,?)}"
-    params = [Sql.INTEGER,lastName, firstName, email, startDate, sickDays, fringeRatio]
+    storedProcedureCall = "{? = call up_create_employee(?,?,?,?,?,?,?)}"
+    params = [Sql.INTEGER, firstName, lastName, email, '7/15/2016', sickDays, 1.35,departmentID]
     createRecord()
+    if (returnValue == 0) {
+      addInfoMessage("Record created succsessfully.")
+    }
+    else {
+      addFatalMessage("Error creating record!")
+    }
   }
 }

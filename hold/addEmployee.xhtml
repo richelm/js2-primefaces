@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/pageTemplate.xhtml">
+
+  <ui:define name="content">
+
+    <h:form>
+    <p:panel header="Add Employee">
+      <p:messages closable="true" />
+
+      <p:panelGrid columns="2" styleClass="ui-noborder">
+
+        <p:outputLabel for="firstName" value="First Name:" />
+        <p:inputText id="firstName" value="#{employeeBean.firstName}" label="FirstName"/>
+
+        <p:outputLabel for="lastName" value="Last Name:" />
+        <p:inputText id="lastName" value="#{employeeBean.lastName}" label="LastName"/>
+
+        <p:outputLabel for="email" value="EMail:" />
+        <p:inputText id="email" value="#{employeeBean.email}" label="EMail"/>
+
+        <p:outputLabel for="sickdays" value="Sick Days:" />
+        <p:inputMask id="sickdays" value="#{employeeBean.sickDays}"  />
+
+        <p:outputLabel for="fringeratio" value="Fringe Ratio:" />
+        <p:inputMask id="fringeratio" maxLength="3" mask="9.99" value="#{employeeBean.fringeRatio}"  />
+
+        <p:outputLabel for="startdate" value="Start Date:" />
+        <p:calendar id="startdate" value="#{employeeBean.startDate}" />
+
+        <p:outputLabel for="departmentid" value="Department:" />
+        <p:selectOneMenu id="departmentid" value="#{employeeBean.departmentID}">
+          <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
+          <f:selectItems value="#{departmentDDV.departments}" />
+        </p:selectOneMenu>
+                
+        <p:commandButton value="Save" validateClient="true" ajax="false"
+            action="#{employeeBean.create()}"/>
+
+
+      </p:panelGrid>
+    </p:panel>
+    </h:form>
+  </ui:define>
+
+</ui:composition>

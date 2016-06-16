@@ -15,13 +15,14 @@ as
   declare
     @procedure_name   longsysname,
     @error            int,
+    @rowcount         int,
     @ret_value        int
 
 select
   @procedure_name = (select name from sysobjects where id = @@procid)
 
 select
-  @ret_value = @employee_id
+  @ret_value = 0
 
 select
   employee_id,
@@ -30,19 +31,31 @@ select
   email,
   start_date,
   sick_days,
-  salary
+  fringe_ratio,
+  department_id
 from
   employee
 where
   employee_id = @employee_id
 
 select
-  @error = @@error
+  @error = @@error,
+  @rowcount = @@rowcount
 
   if (@error != 0)
+  begin
+    rollback transaction
     select @ret_value = @error
+    raiserror 99999 'Error: Could not retrieve employee ID: %1!', @employee_id
+  end
 
-
+  if (@rowcount != 1)
+  begin
+    rollback transaction
+    select @ret_value = -100
+    raiserror 99999 'Warning: Could find record with employee ID: %1!', @employee_id
+  end
+  
 return @ret_value
 go
 
