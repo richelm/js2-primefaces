@@ -17,6 +17,8 @@ import groovy.transform.Canonical;
 @RequestScoped
 public class EmpBean extends GBaseBean {
 
+  double employeeID
+
   @Size(max=40)
   @NotNull(message="You must enter a last name.")
   String lastName
@@ -47,9 +49,15 @@ public class EmpBean extends GBaseBean {
   }
 
   public void update() {
-    storedProcedureCall = "{? = call up_raise_error(?)}"
-    params = [Sql.INTEGER,sickDays]
+    storedProcedureCall = "{? = call up_update_employee(?,?,?,?,?,?,?,?)}"
+    params = [Sql.INTEGER, employeeID, firstName, lastName, email, '7/15/2016', sickDays, 1.35,departmentID]
     updateRecord()
+    if (returnValue == 0) {
+      addInfoMessage("Record updated succsessfully.")
+    }
+    else {
+      addFatalMessage("Error updating record!")
+    }
   }
 
   public void create() {

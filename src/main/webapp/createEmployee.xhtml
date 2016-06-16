@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/pageTemplate.xhtml">
+
+  <ui:define name="content">
+
+    <h:form>
+
+        <p:panel header="Create Employee">
+          <p:messages closable="true" />
+
+          <h:panelGrid columns="2">
+
+          <p:outputLabel for="firstName" value="First Name:" />
+          <p:inputText id="firstName" value="#{empBean.firstName}" label="FirstName"/>
+
+          <p:outputLabel for="lastName" value="Last Name:" />
+          <p:inputText id="lastName" value="#{empBean.lastName}" label="LastName"/>
+
+          <p:outputLabel for="email" value="EMail:" />
+          <p:inputText id="email" value="#{empBean.email}" label="EMail"/>
+
+          <p:outputLabel for="sickdays" value="Sick Days:" />
+          <p:inputMask id="sickdays" maxLength="3" mask="9?99" value="#{empBean.sickDays}"  />
+
+          <p:outputLabel for="departmentid" value="Department ID:" />
+          <p:inputMask id="departmentid" maxLength="2" mask="99" value="#{empBean.departmentID}"  />
+
+        </h:panelGrid>
+          <p:commandButton value="Save" validateClient="true" ajax="false"
+          action="#{empBean.create()}"  />
+        </p:panel>
+
+    </h:form>
+
+  </ui:define>
+
+</ui:composition>
