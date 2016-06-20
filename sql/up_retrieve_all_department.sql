@@ -16,6 +16,8 @@ as
     @error            int,
     @ret_value        int
 
+set nocount on
+
 select
   @procedure_name = (select name from sysobjects where id = @@procid)
 
@@ -34,7 +36,10 @@ select
   @ret_value = 0
 
   if (@error != 0)
-    select @ret_value = @error
+  begin
+    raiserror 99999 'Error number %1! retrieving records in %2!',
+      @error, @procedure_name
+  end
 
 return @ret_value
 go
