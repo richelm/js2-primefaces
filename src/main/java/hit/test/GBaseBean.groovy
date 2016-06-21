@@ -64,7 +64,7 @@ public class GBaseBean {
     }
   }
 
-  private Connection getConnection() {
+  public Connection getConnection() {
     InitialContext ctx = new InitialContext();
     DataSource dataSource = ctx.lookup(dataSourceName)
     return dataSource.getConnection()

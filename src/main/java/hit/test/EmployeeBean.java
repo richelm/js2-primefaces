@@ -40,6 +40,8 @@ public class EmployeeBean extends BaseBean {
 
   double departmentID;
 
+  String city;
+
   @PostConstruct
   public void init() {
     dataSourceName = "jdbc/DSTest";
@@ -64,9 +66,11 @@ public class EmployeeBean extends BaseBean {
   public void setFringeRatio(double d) {
     this.fringeRatio = d;
   }
-
   public void setDepartmentID(double d) {
     this.departmentID = d;
+  }
+  public void setCity(String s) {
+    this.city = s;
   }
 
   // getters
@@ -91,7 +95,9 @@ public class EmployeeBean extends BaseBean {
   public double getDepartmentID() {
     return this.departmentID;
   }
-
+  public String getCity() {
+    return this.city;
+  }
   // create record
   public void create() {
     String upstmt = "{? = call testdb.dbo.up_create_employee(?,?,?,?,?,?,?)}";

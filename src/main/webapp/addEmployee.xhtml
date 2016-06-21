@@ -34,9 +34,9 @@
         <p:outputLabel for="departmentid" value="Department:" />
         <p:selectOneMenu id="departmentid" value="#{employeeBean.departmentID}">
           <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
-          <f:selectItems value="#{departmentDDV.departments}" />
+          <f:selectItems value="#{departmentDD.departments}" />
         </p:selectOneMenu>
-                
+
         <p:commandButton value="Save" validateClient="true" ajax="false"
             action="#{employeeBean.create()}"/>
 
